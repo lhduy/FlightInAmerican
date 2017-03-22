@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
     
     <style>
       circle.dimple-series-1 {
@@ -31,6 +32,15 @@
             .append("h2")
             .text("Flights in Year")
 
+          d3.select("body")
+            .append("p")
+            .text("This report performs the chart of US domestic flight in 10 years from 1998 to 2010. The data comes originally from RITA. In this chart, the bars indicate the month of year agains the total number of US domestic flight without being cancelled. There are 12 color bars which stand for 12 months.")
+
+          d3.select("body")
+            .append("p")
+            .text("Explore to see what you can find over time, have the US airlines improve, worst or remained fairly constant. You are welcome to click on the year button to stop or start the animation, select or de-select year of interest.")
+
+
           var svg = d3.select("body")
             .append("svg")
               .attr("width", width + margin)
@@ -54,7 +64,7 @@
           var firstTick = true;
 
           // Place the indicator bar chart to the right
-          indicator.setBounds(600, 50, 100, 50);
+          indicator.setBounds(600, 50, 100, 200);
 
           // Add dates along the y axis
           var y = indicator.addCategoryAxis("y", "Year");
@@ -167,6 +177,7 @@
     and pass the contents of it to the draw function
     */
   d3.tsv("my_db1.tsv", draw);
+  city = [[-84.426944,33.640444],[-84.426944,33.640444]];
   </script>
 </body>
 </html>
