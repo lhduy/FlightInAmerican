@@ -8,8 +8,9 @@
     
     <style>
       circle.dimple-series-1 {
-        fill: green;
-        opacity: 0.1;
+        fill: blue;
+        opacity: 0.7;
+        r: 4px;
       }
       h2 {
         text-align: center;
@@ -30,7 +31,7 @@
 
           d3.select("body")
             .append("h2")
-            .text("Flights in Year")
+            .text("US Domestics Flights from 1998 to 2008")
 
           d3.select("body")
             .append("p")
@@ -168,6 +169,158 @@
           }
         };
 
+      function draw_line_bar(data) {
+                "use strict";
+        var margin = 75,
+            width = 2000 - margin,
+            height = 500 - margin;
+
+        d3.select("body")
+          .append("h2")
+          .text(" The change of US domestic flight in 10 years")
+
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", width + margin)
+            .attr("height", height + margin)
+            .append('g')
+            .attr('class', 'chart');
+
+        
+        
+        var myLineChart = new dimple.chart(svg, data);
+        myLineChart.setBounds(75,50,800,400)
+        var xAxis = myLineChart.addCategoryAxis("x","Year");
+        var yAxis =  myLineChart.addMeasureAxis("y","Number of Flight");
+        var s = myLineChart.addSeries("Month",dimple.plot.line);
+        myLineChart.addSeries("Month",dimple.plot.bubble);
+
+        xAxis.fontSize = "15";
+        yAxis.fontSize = "15px";
+
+        var myLineLegend = myLineChart.addLegend(900, 50, 60, 300, "Right");
+        myLineLegend._getEntries = function () {
+                var xvalues = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+                var entries = [];
+                xvalues.forEach(function (v) {
+                    entries.push(
+                    {
+                            key: v,
+                            fill: myLineChart.getColor(v).fill,
+                            stroke: myLineChart.getColor(v).stroke,
+                            opacity: myLineChart.getColor(v).opacity,
+                            series: s,
+                            aggField: [v]
+                            }
+                        );
+                    }, this);
+
+                    return entries;
+                };
+        myLineChart.draw();
+
+        myLineChart.legends = [];
+
+        // This block simply adds the legend title. I put it into a d3 data
+        // object to split it onto 2 lines.  This technique works with any
+        // number of lines, it isn't dimple specific.
+        svg.selectAll("title_text")
+          .data(["Click legend to","show/hide Month:"])
+          .enter()
+          .append("text")
+            .attr("x", 900)
+            .attr("y", function (d, i) { return 25 + i * 14; })
+            .style("font-family", "sans-serif")
+            .style("font-size", "10px")
+            .style("color", "Black")
+            .text(function (d) { return d; });
+
+      // Get a unique list of Owner values to use when filtering
+        var filterValues = dimple.getUniqueValues(data, "Month");
+        // Get all the rectangles from our now orphaned legend
+        myLineLegend.shapes.selectAll("rect")
+          // Add a click event to each rectangle
+          .on("click", function (e) {
+            // This indicates whether the item is already visible or not
+            var hide = false;
+            var newFilters = [];
+            // If the filters contain the clicked shape hide it
+            filterValues.forEach(function (f) {
+              if (f === e.aggField.slice(-1)[0]) {
+                hide = true;
+              } else {
+                newFilters.push(f);
+              }
+            });
+            // Hide the shape or show it
+            if (hide) {
+              d3.select(this).style("opacity", 0.2);
+            } else {
+              newFilters.push(e.aggField.slice(-1)[0]);
+              d3.select(this).style("opacity", 0.8);
+            }
+            // Update the filters
+            filterValues = newFilters;
+            // Filter the data
+            myLineChart.data = dimple.filterData(data, "Month", filterValues);
+            // Passing a duration parameter makes the chart animate. Without
+            // it there is no transition
+            myLineChart.draw(777);
+          });
+      }
+
+
+
+      function draw_map(geo_data) {
+        "use strict";
+        var margin = 75,
+            width = 2000 - margin,
+            height = 1000 - margin;
+
+        d3.select("body")
+          .append("h2")
+          .text("Location of Airport")
+
+
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", width + margin)
+            .attr("height", height + margin)
+            .append('g')
+            .attr('class', 'map');
+
+        var projection = d3.geo.mercator()
+                     .scale(440)
+                     .translate([width / 2, height / 2]);
+
+        var path = d3.geo.path().projection(projection);
+
+        var map = svg.selectAll('path')
+               .data(geo_data.features)
+               .enter()
+               .append('path')
+               .attr('d',path)
+               .style('fill','rgb(9,157,217)')
+               .style('stroke','black')
+               .style('stroke-width',0.5);
+
+
+        var coords = city.map(function(d) {
+                    return projection([+d[0], +d[1]]);
+                });
+
+        svg.append('g')
+            .attr("class", "bubble")
+            .selectAll("circle")
+            .data(coords).enter()
+            .append("circle")
+            .attr('cx',function (d) { return d[0]; })
+            .attr('cy',function (d) { return d[1]; })
+            .attr('r',"8px")
+            .attr('fill','red')
+      };
+
+
     </script>
   </head>
 <body>
@@ -177,7 +330,9 @@
     and pass the contents of it to the draw function
     */
   d3.tsv("my_db1.tsv", draw);
-  city = [[-84.426944,33.640444],[-84.426944,33.640444]];
+  d3.tsv("my_db1.tsv", draw_line_bar)
+  //city = [[-84.426944,33.640444],[-84.426944,33.640444]];
+  //d3.json("us_geo.json", draw_map);
   </script>
 </body>
 </html>
