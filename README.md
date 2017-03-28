@@ -1,11 +1,12 @@
 # Domestics Flight In American from 1998 to 2008
 ## Summary
-The objective of this exploratory is to show the variation of US flights between years and months.
-## Desgin
+The objective of this exploratory is to show the variation of US flights between years and months. 
+## Design
 1. I selected bar chart because it is a good visualization to describe my story. With colorbar, it is easily to see the difference between months per year.
 2. I also made 2nd chart more interactively by time. It is useful when you are interested in a specific year.
 3. I also add a control panel of month in the 1st chart. It will help reader to filter the month of interest.
 4. A line chart of year from 1998 to 2008 agains number of flight has been added. From this chart, my readers could have an overview of Domestics American Flight in 10 years. Feel free to select month of interest.
+5. Because of limited time and resources, I decided only collect the data in 10 years from 1998 to 2008. My further exploration will focus on more data and other factors.
 
 ## Feedback
 From: Ignotus
@@ -33,6 +34,17 @@ I can understand better how the US airlines performed across the mentioned 10 ye
 My initial thought is that the bar chart with 12 different colors in the first chart does not add additional value to the story. But as I went through the years, the colors actually made it easier to observe the patterns across the months. Still, it would be nice to present this as a line chart across the months with the option to compare the patterns across a few years.
 
 From: Yen Le
+1.	What do you notice in the visualization?
+I notice two charts illustrating the change of US domestic flight in 10 years. The charts are presented in different colors representing 12 months in a year. The animation also helps me see how the data changes over time in only one chart. 
+2.	What questions do you have about the data?
+We have a clear overview from 1998 to 2008. What happened from 2008 until now ?
+3.	What relationships do you notice?
+The difference of US domestic flight over years from 1998 till 2008 and every month within a year. 
+4.	What do you think is the main takeaway from this visualization?
+I can see how US airlines performed for 10 years from 1998 till 2008
+5.	Is there something you don’t understand in the graphic?
+The line chart looks quite messy to me at first sight when I didn’t know I could show/hide each month of all years. I prefer the bar chart since I can compare the number of flights every month each year. 
+
 
 ## Resources
 http://dimplejs.org/advanced_examples_viewer.html?id=advanced_storyboard_control
