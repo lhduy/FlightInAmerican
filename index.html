@@ -291,14 +291,14 @@
         var y2 = myLineChart.addPctAxis("y", "True");
         y2.hidden = true;
         
-        var s2 = myLineChart.addSeries("9-11 incident", dimple.plot.area,[xAxis, y2]);
+        var s2 = myLineChart.addSeries("September 11 attacks", dimple.plot.area,[xAxis, y2]);
         s2.data = [{
-          "Incident": "11-9",
+          "Incident": "September 11 attacks",
           "True": 1,
           "Year" : 2001
 
         }];
-        myLineChart.assignColor("11-9 incident","red");
+        myLineChart.assignColor("September 11 attacks","red");
         myLineChart.draw();
         myLineLegend.shapes.selectAll("rect")
           // Add a click event to each rectangle
