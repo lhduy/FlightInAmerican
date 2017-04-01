@@ -1,12 +1,17 @@
 # Domestics Flight In American from 1998 to 2008
 ## Summary
-The objective of this exploratory is to show the variation of US flights between years and months. 
+The objective of this visualization project is to study about the change of US domestics flights in a certain period from 1998 to 2008. From my exploration, there are 3 insights about this data:
+1. Due to the advantage of technology, buying air-ticket is easier and cheaper in time. Consequently, more people prefer travelling by airplane.
+2. Summer months (July and August) are the busiest period due to the high amount of vacations.
+3. The September 11 attacks in 2001 caused the decreasing of US domestics flights in the end of 2001 and whole year 2002. This situation has improved since 2003.
+
 ## Design
-1. I selected bar chart because it is a good visualization to describe my story. With colorbar, it is easily to see the difference between months per year.
-2. I also made 2nd chart more interactively by time. It is useful when you are interested in a specific year.
+1. I selected bar chart because it is a good visualization to describe my story. The highlighted bars (red) represent the summer months. It helps to compare those months with the others easily.
+2. I also made 1st chart more interactively by time. It is useful when you are interested in a specific year.
 3. I also add a control panel of month in the 1st chart. It will help reader to filter the month of interest.
 4. A line chart of year from 1998 to 2008 agains number of flight has been added. From this chart, my readers could have an overview of Domestics American Flight in 10 years. Feel free to select month of interest.
-5. Because of limited time and resources, I decided only collect the data in 10 years from 1998 to 2008. My further exploration will focus on more data and other factors.
+5. I added the red line to indicate the September 11 attacks.
+6. Because of limited time and resources, I decided only collect the data in 10 years from 1998 to 2008. My further exploration will focus on more data and other factors.
 
 ## Feedback
 From: Ignotus
@@ -15,7 +20,7 @@ The visualization is clear and I like it.
 2. What questions do you have about the data?
 This data can be aligned with historical events, therefore during my exploration I have tried to map the historical timeline to correlations which have been noticed in the chart.
 3. What relationships do you notice?
-See (1). + After 2000 amount of flights drastically changed in some reason.
+See (1). After 2000 amount of flights drastically changed in some reason.
 4. What do you think is the main takeaway from this visualization?
 Significant drop of number of flights after the event of 9/11 2001. There is the same annomaly happened for 2008. People don't flight on February much in comparison to other months. In general people tend to flight during spring or summer.
 5. Is there something you don’t understand in the graphic?

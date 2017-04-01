@@ -57,13 +57,13 @@
           // Add dates along the y axis
           var y = indicator.addCategoryAxis("y", "Year");
           y.addOrderRule("Year","Desc");
-          //y.hidden = true;
           // Use sales for bar size and hide the axis
           var x = indicator.addMeasureAxis("x", "Year");
           x.hidden = true;
           // Add the bars to the indicator and add event handlers
           var s = indicator.addSeries(null, dimple.plot.bar);
           s.addEventHandler("click", onClick);
+          s.addEventHandler("mouseover", function () {});
           // Draw the side chart
           indicator.draw();
           // Remove the title from the y axis
@@ -99,11 +99,13 @@
         Dimple.js Chart construction code
       */       
           var myChart = new dimple.chart(svg, data);
+          myChart.defaultColors = [new dimple.color("#64B5F6")]
           myChart.setBounds(75,50,500,500)
           var xAxis = myChart.addCategoryAxis("x", "Month");
           var yAxis = myChart.addMeasureAxis("y", "Number of Flight");
-          //myChart.addSeries("Year", dimple.plot.bar);
           myChart.addSeries("Month", dimple.plot.bar);
+          myChart.assignColor("Jul","red");
+          myChart.assignColor("Aug","red");
           xAxis.fontSize = "15px";
           yAxis.fontSize = "15px";
           xAxis.addOrderRule(xvalues);
@@ -242,6 +244,8 @@
                     }, this);
                     return entries;
                 };
+
+
         myLineChart.draw();
         myLineChart.legends = [];
         // This block simply adds the legend title. I put it into a d3 data
@@ -263,8 +267,6 @@
         //var filterValues = dimple.getUniqueValues(data, "Month");
         // Get all the rectangles from our now orphaned legend
 
-        //debugger;
-
         var filterValues = [];
         var shapes = myLineLegend.shapes[0];
 
@@ -283,11 +285,21 @@
           }
         }
 
-        // Filter the data and redraw the chart to show only for three owners.
-        myLineChart.data = dimple.filterData(data, "Month", filterValues);    
+        // Filter the data and redraw the chart to show only for two months.
+        myLineChart.data = dimple.filterData(data, "Month", filterValues);
+        
+        var y2 = myLineChart.addPctAxis("y", "True");
+        y2.hidden = true;
+        
+        var s2 = myLineChart.addSeries("9-11 incident", dimple.plot.area,[xAxis, y2]);
+        s2.data = [{
+          "Incident": "11-9",
+          "True": 1,
+          "Year" : 2001
+
+        }];
+        myLineChart.assignColor("11-9 incident","red");
         myLineChart.draw();
-
-
         myLineLegend.shapes.selectAll("rect")
           // Add a click event to each rectangle
           .on("click", function (e) {
@@ -317,6 +329,7 @@
             // it there is no transition
             myLineChart.draw(777);
           });
+
       }
     </script>
   </head>
